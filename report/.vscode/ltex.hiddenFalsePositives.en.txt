@@ -1,0 +1,1 @@
+{"rule":"COMPREHENSIVE","sentence":"^\\QThis dataset provides comprehensive information on various types of waste collected in Catalonia, including data on selective waste collection practices, by year and municipality.\\E$"}

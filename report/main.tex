@@ -1,0 +1,171 @@
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	a4paper, % Paper size, use either a4paper or letterpaper
+	10pt, % Default font size, can also use 11pt or 12pt, although this is not recommended
+	unnumberedsections, % Comment to enable section numbering
+	twoside, % Two side traditional mode where headers and footers change between odd and even pages, comment this option to make them fixed
+]{LTJournalArticle}
+
+\usepackage{listings}
+
+% Import matlab.tex file
+\input{matlab.tex}
+
+\addbibresource{sample.bib} % BibLaTeX bibliography file
+
+\runninghead{Residues classification in Catalonia} % A shortened article title to appear in the running head, leave this command empty for no running head
+
+\footertext{URV (25/26) Master in Computational Engineering and Mathematics - \textit{Introduction to research}} % Text to appear in the footer, leave this command empty for no footer text
+
+\setcounter{page}{1} % The page number of the first page, set this to a higher number if the article is to be part of an issue or larger work
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{Evolution of Selective Waste Collection \\ Catalan People's engagement in recycling practices}  
+
+% Authors are listed in a comma-separated list with superscript numbers indicating affiliations
+% \thanks{} is used for any text that should be placed in a footnote on the first page, such as the corresponding author's email, journal acceptance dates, a copyright/license notice, keywords, etc
+\author{
+	Ángel Fernández Sobrino\textsuperscript{1}
+	\thanks{
+		Email: \href{mailto:angel.fernandez@estudiants.urv.cat}{angel.fernandez@estudiants.urv.cat}
+	}
+}
+
+
+% Affiliations are output in the \date{} command
+\date{\footnotesize\textsuperscript{\textbf{1}}Escuela Técnica Superior de Ingeniería, Universidad Rovira i Virgili}
+
+% Full-width abstract
+\renewcommand{\maketitlehookd}{%
+	\begin{abstract}
+		\noindent The impact of human activities on the environment has become a major concern in recent decades, not only in the scientific community but also among the general public. One of the key areas where individuals can contribute to environmental sustainability is through selective waste collection. Recycling practices have gained significant attention as a means to reduce waste generation, conserve resources, and mitigate environmental pollution. This study aims to analyze the tendency of the population in Catalonia towards selective waste collection over the past two decades. We seek to find the evolution and the tendency in the engagement of people in recycling practices and prognose the evolution for the next year by creating a model of the collected data.
+	\end{abstract}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Output the title section
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+Keywords: \textit{Waste generation, waste management, recycling, selective waste}
+
+\section{Introduction}
+
+The goverment of Catalonia has a long-term commitment to promoting sustainable waste management practices among its citizens. Since the year 2000, the Catalan government collects and publishes data on selective waste collection, providing valuable insights into the trends and patterns of recycling behavior in the region. This data serves as a foundation for understanding the effectiveness of waste management policies and identifying areas for improvement.
+
+
+\section{Materials \& Methods}
+
+In this article the data provided in the official website of the Catalan government's open data porta (Portal de dades obertes) is used as the primary source of information for analyzing the evolution of selective waste collection in Catalonia. 
+
+This data is promoted by the department "Medi Ambient i Sostenibilitat" of the Catalan government, accessible in: \href{https://mediambient.gencat.cat/ca/dades-documentacio/estadistica/portal-de-dades-obertes-de-la-generalitat-de-catalunya/}{Medi Ambient i Sostenibilitat - Portal de Dades Obertes}.
+
+In the transparency portal, the specific dataset utilized for this study is titled "Estadístiques de residus municipals" (Municipal Waste Statistics) \autocite{DatasetResiduesCatalonia}. This dataset provides comprehensive information on various types of waste collected in Catalonia, including data on selective waste collection practices, by year and municipality. The dataset can be directly accessed at: \href{https://analisi.transparenciacatalunya.cat/Medi-Ambient/Estad-stiques-de-residus-municipals/69zu-w48s}{Estadístiques de residus municipals}
+
+Data has been downloaded in "XLSX" format and processed using Matlab R2024a. The data processing involved cleaning, organizing, and analyzing the dataset to extract relevant information on selective waste collection trends over the past two decades. Firtsly, relevant data columns were identified, (year, total waste collected, selective waste collected, and residual waste collected). Then, data was grouped by year, summing the total amounts of each column each year, adding the total amount for the whole Catalonia region \label{fig:residues_history}.
+
+\begin{figure} % Single column figure
+	\includegraphics[width=\linewidth]{residues_history.png}
+	\caption{Residues collected in Catalonia from 2000 to 2023. Total waste collected, selective waste collected and residual waste collected.}
+	\label{fig:residues_history}
+\end{figure}
+
+Finally, using the total selective waste collected each year and the total waste collected each year, the percentage of selective waste collected was calculated. This results in the ration of waste that has been selectively collected compared to the total waste generated in Catalonia each year. In that way, the evolution of the population engagement in recycling practices can be analyzed, without considering the total amount of waste generated each year, which can vary due to multiple factors, such as population growth or economic activity, among others. 
+
+\begin{figure} % Single column figure
+	\includegraphics[width=\linewidth]{selective_collection_fraction.png}
+	\caption{Ratio of selective waste collected in Catalonia from 2000 to 2023.}
+	\label{fig:residues_selected_fraction}
+\end{figure}
+
+For the analysis of the data, a model of the collected data has been created to analyze the evolution and the tendency in the engagement of people in recycling practices and prognose the evolution for the next year.
+
+The model used is a linear regression model equation \ref{eq:linearmodel}, which assumes a linear relationship between the independent variable (year) and the dependent variable (percentage of selective waste collected). The model is fitted to the data in a least-squares sense, using the implementation provided by Matlab's "polyfit" function. The model is then used to predict the percentage of selective waste collected for the year 2024 (the next year after the last data point in 2023).
+
+% Linear equation model:
+\begin{equation}
+	y = mx + b
+	\label{eq:linearmodel}
+\end{equation}
+
+Insight and trends will be presented using various visualizations, including graphs and charts, to effectively communicate the findings of the study.
+
+\section{Results}
+
+An overlook of the data on selective waste collection in Catalonia over the past two decades reveals a significant increase in the engagement of the population in recycling practices since the year 2000, as shown in Figure \ref{fig:residues_history}.
+
+Considering the percentage of selective waste collected each year, it can be observed that it has increased from less than 15\% in 2000 to nearly 50\% in 2023, as shown in Figure \ref{fig:residues_selected_fraction}.
+
+\begin{figure} % Single column figure
+	\includegraphics[width=\linewidth]{linear_fit_2019_2023.png}
+	\caption{Model of the ratio of selective waste collected in Catalonia from 2019 to 2023.}
+	\label{fig:residues_selected_fraction_model}
+\end{figure}
+
+The following code abstract has been used to fit the linear regression model to the data from 2019 to 2023 and predict the percentage of selective waste collected for the year 2024:
+
+\begin{lstlisting}[language=Matlab]
+	%% Perform linear regression on Selective collection fraction from 2019 to 2023
+
+	% Extract the data from the years 2019 to 2023
+	yearsSubset = TotalSelectiva(TotalSelectiva.Any >= datetime(2019,1,1) & TotalSelectiva.Any <= datetime(2023,1,1), :);
+
+	% Perform linear regression
+	fitSelective = polyfit(yearsSubset.Any.Year, yearsSubset.Fraction, 1);
+	fprintf('Linear fit equation: y = %.2fx + %.2f\n', fitSelective(1), fitSelective(2));
+
+	% Predict the selective collection for the year 2024
+	yearToPredict = 2024;
+	predictedValue = polyval(fitSelective, yearToPredict);
+	fprintf('Predicted selective collection for %d: %.2f\n', yearToPredict, predictedValue * 100);
+\end{lstlisting}
+
+The linear regression model fitted to the data indicates a positive trend in the percentage of selective waste collected over the last 5 years with a steady linear increase.
+
+Which corresponds to the following linear equation \ref{eq:linearmodel_fit}:
+
+\begin{equation}
+	y = 0.01x - 17.56
+	\label{eq:linearmodel_fit}
+\end{equation}
+
+The model predicts that the percentage of selective waste collected will continue to increase in the coming years, expecting to reach 49.36\% in 2024.
+
+\section{Discussion}
+
+In general, the data shows a positive trend in the engagement of the population in recycling practices in Catalonia over the past two decades. The percentage of selective waste collected has steadily increased in last years, indicating a growing awareness and commitment to environmental sustainability among the population.
+
+It is observed that, between the years 2010 and 2013, there was a slight decline in the percentage of selective waste collected. This period coincides with the aftermath of the global financial crisis. It also came with an important reduction in the total waste collected. Economic factors influence has been proposed by various studies, and government reports \autocite{PressRelease2013, Report2013}. The high complexity of the factors involved makes it difficult get a clear conclusion on the causes of this decline. Population may be less motivated to engage in recycling practices during times of economic hardship, prioritizing other immediate needs over environmental concerns. Also, residues generation dropped significantly, linked to a decrease in consumption patterns, which may have led to a reduced volume of recyclable materials being generated.
+
+However, after this period, the residues selection percentage resumed its upward trajectory. While the total waste generation was also recovering the pre-crisis levels with the economic recovery, the new waste generated was selectively collected. This shows an improved engagement of the population in recycling practices, and also shows policies effectiveness and increase availability of recyclable products for consumers. The percentage of selective waste collected reached a peak of 48.6\% in 2023 \Ref{fig:residues_selected_fraction}.
+
+The proposed model shows a steady linear increase in the percentage of selective waste collected over the last 5 years. This suggests that the population's engagement in recycling practices is likely to continue to grow in the coming years, assuming that current trends and policies remain in place, there is no major economic downturns, and manufacturers improve and increase the availability of recyclable products for consumers.
+
+\section{Acknowledgements}
+
+This work has been carried out as part of the "Introduction to research" course of the Master in Computational Engineering and Mathematics at the Universitat Rovira i Virgili (URV). Thanks to the Prof. Francesc Serratosa Casanelles for the effort dedicated to this course.
+
+\section{Statements and Declarations}
+
+The data used in this study is provided by the Catalan government's open data portal (Portal de dades obertes) and is promoted by the department "Medi Ambient i Sostenibilitat" of the Catalan government, which is publicly and freely accessible online.
+
+\printbibliography
+
+\section{Supporting materials}
+
+The data analysis code used in this study are available at the following GitHub repository: \href{https://github.com/AngelFernandezSobrino/catalonia-residues-generation-simple-model}{Github AngelFernandezSobrino catalonia-residues-generation-simple-model}.
+
+\end{document}
+
