@@ -117,19 +117,19 @@ Considering the percentage of selective waste collected each year, it can be obs
 The following code abstract has been used to fit the linear regression model to the data from 2019 to 2023 and predict the percentage of selective waste collected for the year 2024:
 
 \begin{lstlisting}[language=Matlab]
-	%% Perform linear regression on Selective collection fraction from 2019 to 2023
+%% Perform linear regression on Selective collection fraction from 2019 to 2023
 
-	% Extract the data from the years 2019 to 2023
-	yearsSubset = TotalSelectiva(TotalSelectiva.Any >= datetime(2019,1,1) & TotalSelectiva.Any <= datetime(2023,1,1), :);
+% Extract the data from the years 2019 to 2023
+yearsSubset = TotalSelectiva(TotalSelectiva.Any >= datetime(2019,1,1) & TotalSelectiva.Any <= datetime(2023,1,1), :);
 
-	% Perform linear regression
-	fitSelective = polyfit(yearsSubset.Any.Year, yearsSubset.Fraction, 1);
-	fprintf('Linear fit equation: y = %.2fx + %.2f\n', fitSelective(1), fitSelective(2));
+% Perform linear regression
+fitSelective = polyfit(yearsSubset.Any.Year, yearsSubset.Fraction, 1);
+fprintf('Linear fit equation: y = %.2fx + %.2f\n', fitSelective(1), fitSelective(2));
 
-	% Predict the selective collection for the year 2024
-	yearToPredict = 2024;
-	predictedValue = polyval(fitSelective, yearToPredict);
-	fprintf('Predicted selective collection for %d: %.2f\n', yearToPredict, predictedValue * 100);
+% Predict the selective collection for the year 2024
+yearToPredict = 2024;
+predictedValue = polyval(fitSelective, yearToPredict);
+fprintf('Predicted selective collection for %d: %.2f\n', yearToPredict, predictedValue * 100);
 \end{lstlisting}
 
 The linear regression model fitted to the data indicates a positive trend in the percentage of selective waste collected over the last 5 years with a steady linear increase.
